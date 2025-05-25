@@ -11,19 +11,19 @@ while True:
        
         saida = linha
         if saida == "Azul":
-            pyautogui.write("a")
+            pyautogui.press("a")
 
         elif saida == "Roxo": 
-            pyautogui.write("s")
+            pyautogui.press("s")
 
         elif saida == "Verde":
-            pyautogui.write("d")
+            pyautogui.press("d")
 
         elif saida == "Vermelho":
-            pyautogui.write("f")
+            pyautogui.press("f")
 
         elif saida == "Amarelo":
-            pyautogui.write("g")
+            pyautogui.press("g")
 
         else:
             None
