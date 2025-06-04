@@ -1,30 +1,40 @@
 import serial
 import time
-import pyautogui
+from pynput.keyboard import Controller
 
-arduino= serial.Serial('COM9',9600)
-time.sleep(0.1)
+keyboard = Controller()
+
+try:
+    arduino = serial.Serial('COM5', 9600, timeout=1)
+    time.sleep(1)
+except serial.SerialException:
+    print("Erro: Não foi possível abrir a porta COM5.")
+    exit()
+
+print("Conectado ao Arduino!")
 
 while True:
     if arduino.in_waiting > 0:
         linha = arduino.readline().decode('utf-8').strip()
-       
-        saida = linha
-        if saida == "Azul":
-            pyautogui.press("a")
+        print("Recebido:", linha)
 
-        elif saida == "Roxo": 
-            pyautogui.press("s")
-
-        elif saida == "Verde":
-            pyautogui.press("d")
-
-        elif saida == "Vermelho":
-            pyautogui.press("f")
-
-        elif saida == "Amarelo":
-            pyautogui.press("g")
-
-        else:
-            None
+        if linha == "Vermelho":
+            keyboard.press('a')
+            time.sleep(0.15) 
+            keyboard.release('a')
         
+        elif linha == "Roxo":
+            keyboard.press('s')
+            time.sleep(0.15)
+            keyboard.release('s')
+
+        elif linha == "Verde":
+            keyboard.press('d')
+            time.sleep(0.15)
+            keyboard.release('d')
+
+
+        elif linha == "Amarelo":
+            keyboard.press('f')
+            time.sleep(0.15)
+            keyboard.release('f')
